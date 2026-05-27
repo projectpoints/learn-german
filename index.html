@@ -173,7 +173,7 @@
       flex-direction: column;
       gap: 16px;
     }
-    .inline-form-group input, .inline-form-group select {
+    .inline-form-group input {
       width: 100%;
       padding: 14px 18px;
       border-radius: 60px;
@@ -182,7 +182,7 @@
       background: white;
       font-size: 0.95rem;
     }
-    .inline-form-group input:focus, .inline-form-group select:focus {
+    .inline-form-group input:focus {
       outline: none;
       border-color: #e11d48;
       box-shadow: 0 0 0 3px rgba(225,29,72,0.1);
@@ -350,7 +350,7 @@
     }
   }
 
-  // ----- HOMEPAGE CONTENT: form now placed in the right column (hero image area) and removed old text -----
+  // ----- HOMEPAGE CONTENT: form now placed in the right column, select field removed -----
   function renderHome() {
     return `
       <section class="hero">
@@ -366,14 +366,14 @@
             </div>
           </div>
           
-          <!-- RIGHT COLUMN: FORM ONLY (removed Goethe/TestDaF text and badge) -->
+          <!-- RIGHT COLUMN: FORM ONLY (removed select dropdown for target level) -->
           <div class="hero-form-card-right">
             <div class="hero-form-title">
               <i class="fas fa-graduation-cap"></i> 
               <span>Get Free Counselling & Course Brochure</span>
             </div>
             <form id="heroMainForm" action="https://web3forms.com/api/v1/submit" method="POST">
-              <input type="hidden" name="access_key" value="YOUR-ACCESS-KEY-HERE">
+              <input type="hidden" name="access_key" value="4ec6cb0d-d8ea-445c-ab79-07c73212d2e2">
               <input type="hidden" name="subject" value="German Course - Hero Lead (Right Panel)">
               <input type="hidden" name="redirect" value="false">
               <input type="checkbox" name="botcheck" style="display: none;">
@@ -381,16 +381,6 @@
                 <input type="text" name="name" placeholder="Full Name *" required>
                 <input type="email" name="email" placeholder="Email Address *" required>
                 <input type="tel" name="phone" placeholder="Phone Number *" required>
-                <select name="preferred_level" required>
-                  <option value="">Select Your Target Level</option>
-                  <option>A1 Beginner</option>
-                  <option>A2 Elementary</option>
-                  <option>B1 Intermediate</option>
-                  <option>B2 Upper Int.</option>
-                  <option>C1 Advanced</option>
-                  <option>C2 Mastery</option>
-                  <option>Full Course (A1-C2)</option>
-                </select>
                 <button type="submit" class="hero-submit-btn"><i class="fas fa-arrow-right"></i> Request Callback</button>
               </div>
               <div id="heroFormStatus" class="hero-form-status"></div>
@@ -576,7 +566,6 @@
     const heroForm = document.getElementById('heroMainForm');
     const heroStatus = document.getElementById('heroFormStatus');
     if(heroForm) {
-      // Remove previous listener if any
       if(heroForm._listener) heroForm.removeEventListener('submit', heroForm._listener);
       const handler = async (e) => {
         e.preventDefault();
